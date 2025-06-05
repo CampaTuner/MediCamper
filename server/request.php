@@ -2,6 +2,7 @@
 session_start();
 require('../common/db.php');
 
+
 if (isset($_POST['register-submit'])) {
 
     if (empty($_POST['p_email']) || empty($_POST['p_username']) || empty($_POST['p_password']) || empty($_POST['p_confirm_password'])) {
@@ -150,4 +151,83 @@ if (isset($_POST['admin-login-submit'])) {
 
     $stmt->close();
     $conn->close();
+}
+
+if (isset($_POST['doctor_signup_submit'])) {
+
+
+    if (empty($_POST['name']) || empty($_POST['fees']) || empty($_POST['qualification']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['times']) || empty($_POST['about']) || empty($_POST['location'])) {
+        $_SESSION['doctor_signup_error'] = "Please Fill all Fields";
+        header('location: ../?doctor-signup=true');
+        exit();
+    }
+
+    // collect data from html
+    $name = $_POST['name'];
+    $fees = $_POST['fees'];
+    $qualification = $_POST['qualification'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $times = $_POST['times'];
+    $about = $_POST['about'];
+    $location = $_POST['location'];
+
+    // 2. Check for duplicate email
+    $checkEmail = mysqli_query($conn, "SELECT id FROM doctor WHERE email='$email'");
+    if (mysqli_num_rows($checkEmail) > 0) {
+        $_SESSION['doctor_signup_error'] = "Email already registered!";
+        header('location: ../?doctor-signup=true');
+        exit();
+    }
+
+    // 3. Handle avatar upload
+    $avatarName = "";
+    if (!empty($_FILES['avatar']['name'])) {
+        $targetDir = "uploads/";
+        $fileName = time() . '_' . basename($_FILES["avatar"]["name"]);
+        $targetFilePath = $targetDir . $fileName;
+
+        // Create uploads directory if not exist
+        if (!file_exists($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+        if (in_array($fileType, $allowedTypes)) {
+            if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $targetFilePath)) {
+                $avatarName = $fileName;
+            } else {
+                $_SESSION['doctor_signup_error'] = "Failed to upload avatar.";
+                header('location: ../?doctor-signup=true');
+                exit();
+            }
+        } else {
+            $_SESSION['doctor_signup_error'] = "Only JPG, PNG, GIF & WEBP files allowed.";
+            header('location: ../?doctor-signup=true');
+            exit();
+        }
+
+        // 4. Insert into database
+        $insertQuery = "INSERT INTO doctor 
+        (name, fees, qualification, email, password, times, about, location, avatar) 
+        VALUES 
+        ('$name', '$fees', '$qualification', '$email', '$password', '$times', '$about', '$location', '$avatarName')";
+
+        if (mysqli_query($conn, $insertQuery)) {
+            // Success
+            $_SESSION['doctor_signup_success'] = "Registration successful! Please login.";
+            header('location: ../?all_doctors=true');
+            exit();
+        } else {
+            $_SESSION['doctor_signup_error'] = "Database error: " . mysqli_error($conn);
+            header('location: ../?doctor-signup=true');
+            exit();
+        }
+    } else {
+        $_SESSION['doctor_signup_error'] = "An Unknown Error Occured!";
+        header('location: ../?doctor-signup=true');
+        exit();
+    }
 }

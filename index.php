@@ -23,8 +23,12 @@
             header('location: ?patient-login=true');
         } else if (isset($_GET['admin-login'])) {
             include('./client/auth/admin_login.php');
-        }else if (isset($_GET['doctor-signup'])) {
+        } else if (isset($_GET['doctor-signup'])) {
             include('./client/auth/doctor_signup.php');
+        } else if (isset($_GET['all_doctors'])) {
+            include('./client/all_doctors.php');
+        } else if (isset($_GET['all_patients'])) {
+            include('./client/all_patients.php');
         }
         ?>
 

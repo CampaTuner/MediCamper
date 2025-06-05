@@ -14,29 +14,29 @@
                         </div>
                     <?php endif; ?>
 
-                    <form action="doctor_register.php" method="POST" enctype="multipart/form-data">
+                    <form action="server/request.php" method="POST" enctype="multipart/form-data">
                         <div class="row g-3">
                             <!-- Left Column -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name" class="form-label">Full Name</label>
-                                    <input type="text" name="name" class="form-control" placeholder="Dr. John Doe" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Dr. John Doe">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="fees" class="form-label">Fees (₹)</label>
-                                    <input type="number" name="fees" step="0.01" class="form-control" placeholder="500.00" required>
+                                    <input type="number" name="fees" step="0.01" class="form-control" placeholder="500.00">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="qualification" class="form-label">Qualification</label>
-                                    <input type="text" name="qualification" class="form-control" placeholder="MBBS, MD" required>
+                                    <input type="text" name="qualification" class="form-control" placeholder="MBBS, MD">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="email" class="form-label">Email Address</label>
-                                    <input type="email" name="email" class="form-control" placeholder="doctor@example.com" required>
+                                    <input type="email" name="email" class="form-control" placeholder="doctor@example.com">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control" placeholder="******" required>
+                                    <input type="password" name="password" class="form-control" placeholder="******">
                                 </div>
                             </div>
 
@@ -44,7 +44,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="times" class="form-label">Available Times</label>
-                                    <input type="text" name="times" class="form-control" placeholder="Mon-Fri, 10 AM - 4 PM" required>
+                                    <input type="text" name="times" class="form-control" placeholder="Mon-Fri, 10 AM - 4 PM">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="about" class="form-label">About</label>
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="location" class="form-label">Location</label>
-                                    <input type="text" name="location" class="form-control" placeholder="Kolkata, India" required>
+                                    <input type="text" name="location" class="form-control" placeholder="Kolkata, India">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="avatar" class="form-label">Profile Avatar</label>

@@ -9,26 +9,26 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarContent">
-             <?php if (isset($_SESSION['isAdmin'])) : ?>
-                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="?home=true">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="?doctor-signup=true">Create Doctor</a></li>
-                <li class="nav-item"><a class="nav-link" href="?doctors=true">All Doctors</a></li>
-                <li class="nav-item"><a class="nav-link" href="?doctors=true">All Appinments</a></li>
-                <li class="nav-item"><a class="nav-link" href="?doctors=true">All Patients</a></li>
-            </ul>
+            <?php if (isset($_SESSION['isAdmin'])) : ?>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="?home=true">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="?doctor-signup=true">Create Doctor</a></li>
+                    <li class="nav-item"><a class="nav-link" href="?all_doctors=true">All Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="?doctors=true">All Appinments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="?all_patients=true">All Patients</a></li>
+                </ul>
             <?php else : ?>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="?home=true">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="?my-appointments=true">My Appointments</a></li>
-                    <li class="nav-item"><a class="nav-link" href="?doctors=true">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="?all_doctors=true">Doctors</a></li>
                     <li class="nav-item"><a class="nav-link" href="?membership=true">Membership</a></li>
                     <li class="nav-item"><a class="nav-link" href="?about=true">About</a></li>
                 </ul>
                 <form class="d-flex me-3" role="search">
                     <input class="form-control form-control-dark me-2" type="search" placeholder="Search Doctors..." aria-label="Search">
                 </form>
-                
+
             <?php endif; ?>
 
 

@@ -96,7 +96,7 @@ if (isset($_POST['login-submit'])) {
             $_SESSION['p_avatar'] = $p_avatar;
             $_SESSION['p_email'] = $p_email;
             $_SESSION['success'] = "Login successful!";
-            header('location: ../');
+            header('location: ../?home=true');
             exit();
         } else {
             $_SESSION['patient_login_error'] = "Incorrect password!";
@@ -136,7 +136,7 @@ if (isset($_POST['admin-login-submit'])) {
             $_SESSION['p_username'] = "ADMIN";
             $_SESSION['success'] = "Login successful!";
             $_SESSION['isAdmin'] = true;
-            header('Location: ../');
+            header('Location: ../?home=true');
             exit();
         } else {
             $_SESSION['admin_login_error'] = "Incorrect password!";
@@ -230,4 +230,31 @@ if (isset($_POST['doctor_signup_submit'])) {
         header('location: ../?doctor-signup=true');
         exit();
     }
+}
+
+if (isset($_POST['book_appointment'])) {
+    $d_id = $_POST['doctor_id'];
+
+    if (empty($_POST['selected_day']) || empty($_POST['selected_slot'])) {
+        $_SESSION['appointment_error'] = "Please select a day and a slot.";
+        header("location: ../?booked-doctor=$d_id");
+        exit();
+    }
+    $p_id = $_SESSION['p_id'];
+    $day = $_POST['selected_day'];
+    $slot = $_POST['selected_slot'];
+
+    $stmt = $conn->prepare("INSERT INTO appointment (d_id, p_id, day, slot) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("iiss", $d_id, $p_id, $day, $slot);
+
+    if ($stmt->execute()) {
+        $_SESSION['appointment_success'] = "Appointment booked successfully!";
+        header("location: ../?booked-doctor=$d_id");
+    } else {
+        $_SESSION['appointment_error'] = "Something went wrong. Please try again.";
+        header("location: ../?booked-doctor=$d_id");
+    }
+
+    $stmt->close();
+    $conn->close();
 }

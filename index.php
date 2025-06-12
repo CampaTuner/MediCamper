@@ -29,6 +29,14 @@
             include('./client/all_doctors.php');
         } else if (isset($_GET['all_patients'])) {
             include('./client/all_patients.php');
+        } else if (isset($_GET['home'])) {
+            include('./client/home.php');
+        } else if (isset($_GET['booked-doctor'])) {
+            include('./client/booked-doctor.php');
+        } else if (isset($_GET['my-appointments'])) {
+            include('./client/my_appointments.php');
+        } else if (isset($_GET['all_appointments'])) {
+            include('./client/all_appointments.php');
         }
         ?>
 

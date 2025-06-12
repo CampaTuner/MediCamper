@@ -14,7 +14,7 @@
                     <li class="nav-item"><a class="nav-link" href="?home=true">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="?doctor-signup=true">Create Doctor</a></li>
                     <li class="nav-item"><a class="nav-link" href="?all_doctors=true">All Doctors</a></li>
-                    <li class="nav-item"><a class="nav-link" href="?doctors=true">All Appinments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="?all_appointments=true">All Appinments</a></li>
                     <li class="nav-item"><a class="nav-link" href="?all_patients=true">All Patients</a></li>
                 </ul>
             <?php else : ?>
